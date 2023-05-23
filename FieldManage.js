@@ -107,3 +107,48 @@ function isHit(x, y,mino,rotate,array)
     }
     return false;
 }
+
+function minoViewTable(tableName,mino){
+    let viewTable =document.getElementById(tableName); 
+    //Tableに反映
+    for (let i = 0; i < MinoShape(mino,0).length; i++)
+    {
+        for (let j = 0; j < MinoShape(mino,0)[0].length; j++)
+        {
+            if(MinoShape(mino,0)[i][j] === 0){
+                viewTable.rows[i].cells[j].style.backgroundColor = '#FFFFFF'
+            }
+            else{
+            viewTable.rows[i].cells[j].style.backgroundColor = Color(mino);
+            }
+        }
+    }
+}
+
+function minoViewTable(tableName,mino){
+    let viewTable =document.getElementById(tableName); 
+    //Tableに反映
+    for (let i = 0; i < MinoShape(mino,0).length; i++)
+    {
+        for (let j = 0; j < MinoShape(mino,0)[0].length; j++)
+        {
+            if(MinoShape(mino,0)[i][j] === 0){
+                viewTable.rows[i].cells[j].style.backgroundColor = '#FFFFFF'
+            }
+            else{
+            viewTable.rows[i].cells[j].style.backgroundColor = Color(mino);
+            }
+        }
+    }
+}
+
+function minoViewNextTable(array){
+    minoViewTable("nextTBR1",array[0]);
+    minoViewTable("nextTBR2",array[1]);
+    minoViewTable("nextTBR3",array[2]);
+    minoViewTable("nextTBR4",array[3]);
+    minoViewTable("nextTBR5",array[4]);
+    minoViewTable("nextTBR6",array[5]);
+    minoViewTable("nextTBR7",array[6]);
+
+}

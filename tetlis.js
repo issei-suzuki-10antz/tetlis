@@ -67,8 +67,7 @@ document.addEventListener('keypress',
                 console.log("hey");
                 holdMino = nowMino;
                 reloadMino();
-                let hold =document.getElementById('hold');
-                hold.innerText = holdMino; 
+                minoViewTable("holdTBR",holdMino);
                 isHolded = true;
             }
             if((holdMino != null)&& !isHit(minoX, minoY - 1, nowMino,nowRotate,field)&& !isHolded)
@@ -80,8 +79,7 @@ document.addEventListener('keypress',
                 
                 minoX = 3;
                 minoY = 0;
-                let hold =document.getElementById('hold');
-                hold.innerText = holdMino; 
+                minoViewTable("holdTBR",holdMino);
                 isHolded = true;
             }
         }
@@ -148,8 +146,11 @@ function Init() {
         nextMinos[i] = nextMinos[j];
         nextMinos[j] = tmp;
     }
+    /*
     let nextNotice =document.getElementById('next'); 
     nextNotice.innerText = nextMinos.slice(0,7);
+    */
+    minoViewNextTable(nextMinos.slice(0,7));
 
     //最初のミノのみ代入
     nowMino = Math.floor( Math.random() * 6 ) + 1;
@@ -180,7 +181,10 @@ function reloadMino()
     nowRotate = 0;
     nowMino = nextMinos[0]
     nextMinos.shift();
+    /*
     let nextNotice =document.getElementById('next'); 
     nextNotice.innerText = nextMinos.slice(0,7);
+    */
+    minoViewNextTable(nextMinos.slice(0,7));
     isHolded = false;
 }
