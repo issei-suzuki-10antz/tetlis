@@ -25,12 +25,12 @@ function Color(mino){
         case Mino.T:
             return '#9400D3';
         default:
-            return '#FFFFFF';
+            return '#000000';
       }
 }
 
 
-function MinoShape(mino,rotateNumber){
+function MinoShape(mino,rotateNumber){ 
     let minoShape = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
     switch (mino) {
         case Mino.I:
@@ -55,7 +55,7 @@ function MinoShape(mino,rotateNumber){
             minoShape = [[0, 0, 0, 0], [1, 1, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0]];
             break;
         default:
-          console.log(`Sorry, we are out of ${expr}.`);
+          console.log("undefined shape");
           return;
       }
       if(rotateNumber === 0){

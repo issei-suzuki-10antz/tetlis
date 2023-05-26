@@ -1,8 +1,9 @@
-window.onload = function () {
+$(document).ready( function () {
     //開いた時に実行される
     Init();
     Start();
 }
+)
 const height = 22;
 const width = 10;
 
@@ -22,35 +23,34 @@ let isHolded = false;
 let isGaming = false;
 
 // 時間処理
-var timer    = null;
+var timer    = 0;
+var updateTime =70;
 
 var Start = function() {
-    Init();
     isGaming = true;
-	if (!timer) timer = setInterval(Update, 700);   
 }
 
-var Update = function() {
-    //接地されているならFieldにミノを転写
+$(function(){
+    setInterval(function(){
+        if(!isGaming) return;
+        timer += 1;
+        if(timer >= updateTime) {
+            if (isHit(minoX, minoY + 1, nowMino,nowRotate,field)){
+                MinoBakeField(minoX,minoY,nowMino,nowRotate,field);
+                ArratLineChack(field);
+                reloadMino();
+            }
+            else {
+                ++minoY;
+            }
+        displayTable(minoX,minoY,nowMino,nowRotate,field);
+        timer -= updateTime;
+        }
+    },10);
     
-	if (isHit(minoX, minoY + 1, nowMino,nowRotate,field))
-        {
-            MinoBakeField(minoX,minoY,nowMino,nowRotate,field);
-            ArratLineChack(field);
-            reloadMino();
-        }
-        else
-        {
-            ++minoY;
-        }
-    displayTable(minoX,minoY,nowMino,nowRotate,field);
-}
-
+});
 
 var Exit = function() {
-	// setIntervalの停止
-	clearInterval(timer);
-	time = null;
     isGaming = false;
 }
 
@@ -58,10 +58,10 @@ var Exit = function() {
 
 // キー処理
 document.addEventListener('keypress',
-    event => {
-        if(!isGaming) return;
-        //ボタン処理
-        if (event.key === 'q' ) {
+    e => {
+    if(!isGaming) return;
+    //ボタン処理
+    if (e.key === 'q' ) {
             if(holdMino === null && !isHolded)
             {
                 console.log("hey");
@@ -82,33 +82,33 @@ document.addEventListener('keypress',
                 minoViewTable("holdTBR",holdMino);
                 isHolded = true;
             }
-        }
-        if (event.key === 'a') {
+    }
+    if (e.key === 'a') {
             if (!isHit(minoX - 1, minoY, nowMino,nowRotate,field))
                 {
                     minoX--;
                 }
-         }
-         if (event.key === 's') {
+    }
+    if (e.key === 's') {
             if (!isHit(minoX, minoY + 1, nowMino,nowRotate,field))
                 {
                     minoY++;
                 }
-         }
-         if (event.key === 'd') {
+    }
+    if (e.key === 'd') {
             if (!isHit(minoX + 1, minoY, nowMino,nowRotate,field))
                 {
                     minoX++;
                 }
-         }
-         if (event.key === 'w') {
+    }
+    if (e.key === 'w') {
             if (!isHit(minoX, minoY, nowMino,nowRotate + 1,field))
                 {
                     nowRotate++;
                     if(nowRotate > 4) nowRotate = nowRotate % 4;
                 }
-         }
-         if (event.key === ' ' ) {
+    }
+    if (e.key === ' ' ) {
             for(let i = 0; i < height; i++){
                 if (!isHit(minoX, minoY + 1, nowMino,nowRotate,field))
                 {
@@ -122,9 +122,9 @@ document.addEventListener('keypress',
                     break;
                 }
             }
-         }
-            displayTable(minoX,minoY,nowMino,nowRotate,field);
-    });
+    }
+    displayTable(minoX,minoY,nowMino,nowRotate,field);
+});
 
 function Init() {
 
@@ -146,10 +146,6 @@ function Init() {
         nextMinos[i] = nextMinos[j];
         nextMinos[j] = tmp;
     }
-    /*
-    let nextNotice =document.getElementById('next'); 
-    nextNotice.innerText = nextMinos.slice(0,7);
-    */
     minoViewNextTable(nextMinos.slice(0,7));
 
     //最初のミノのみ代入
@@ -158,7 +154,7 @@ function Init() {
 
 function reloadMino()
 {
-    if(nextMinos.length < 7){
+    if(nextMinos.length < 8){
         let bufArray = [0];
         bufArray = [1,2,3,4,5,6,7]
         for(i = 6; i > 0; i--)
@@ -181,10 +177,6 @@ function reloadMino()
     nowRotate = 0;
     nowMino = nextMinos[0]
     nextMinos.shift();
-    /*
-    let nextNotice =document.getElementById('next'); 
-    nextNotice.innerText = nextMinos.slice(0,7);
-    */
     minoViewNextTable(nextMinos.slice(0,7));
     isHolded = false;
 }

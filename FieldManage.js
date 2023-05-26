@@ -38,16 +38,15 @@ function displayTable (x,y, mino,rotate,array) {
     //現在のミノをBufferに書き込み
     MinoBakeField(x,y,mino,rotate,bufferField);
     //Tableに反映
-    let table =document.getElementById('myTBR'); 
     for (let i = 0; i < array.length; i++)
     {
         for (let j = 0; j < array[0].length; j++)
         {
             if(bufferField[i][j] === 0){
-                table.rows[i].cells[j].style.backgroundColor = '#FFFFFF'
+                $("#myTBR tr").eq(i).children("td").eq(j).css("background-color", "#FFFFFF");
             }
             else{
-            table.rows[i].cells[j].style.backgroundColor = Color(bufferField[i][j]);
+                $("#myTBR tr").eq(i).children("td").eq(j).css("background-color", Color(bufferField[i][j]));
             }
         }
 
@@ -70,12 +69,14 @@ function ArratLineChack(array){
 
         if (isLineFilled === true)
         {
+            $("#audio").get(0).play();
             for (let k = i; k > 0; k--)
             {
                 array[k] = [...array[k-1]];
             }
         }
     }
+
 }
 
 
@@ -109,40 +110,26 @@ function isHit(x, y,mino,rotate,array)
 }
 
 function minoViewTable(tableName,mino){
-    let viewTable =document.getElementById(tableName); 
     //Tableに反映
     for (let i = 0; i < MinoShape(mino,0).length; i++)
     {
         for (let j = 0; j < MinoShape(mino,0)[0].length; j++)
         {
             if(MinoShape(mino,0)[i][j] === 0){
-                viewTable.rows[i].cells[j].style.backgroundColor = '#FFFFFF'
+                $("#" + tableName + " tr").eq(i).children("td").eq(j).css("background-color", "#FFFFFF");
             }
             else{
-            viewTable.rows[i].cells[j].style.backgroundColor = Color(mino);
-            }
-        }
-    }
-}
-
-function minoViewTable(tableName,mino){
-    let viewTable =document.getElementById(tableName); 
-    //Tableに反映
-    for (let i = 0; i < MinoShape(mino,0).length; i++)
-    {
-        for (let j = 0; j < MinoShape(mino,0)[0].length; j++)
-        {
-            if(MinoShape(mino,0)[i][j] === 0){
-                viewTable.rows[i].cells[j].style.backgroundColor = '#FFFFFF'
-            }
-            else{
-            viewTable.rows[i].cells[j].style.backgroundColor = Color(mino);
+                $("#" + tableName + " tr").eq(i).children("td").eq(j).css("background-color", Color(mino));
             }
         }
     }
 }
 
 function minoViewNextTable(array){
+    if(array.length < 7){
+        console.log("array is too short");
+        return;
+    }
     minoViewTable("nextTBR1",array[0]);
     minoViewTable("nextTBR2",array[1]);
     minoViewTable("nextTBR3",array[2]);
@@ -150,5 +137,4 @@ function minoViewNextTable(array){
     minoViewTable("nextTBR5",array[4]);
     minoViewTable("nextTBR6",array[5]);
     minoViewTable("nextTBR7",array[6]);
-
 }
