@@ -26,6 +26,9 @@ let isGaming = false;
 var timer    = 0;
 var updateTime =70;
 
+
+//消したライン数
+var eraceLines = 0;
 var Start = function() {
     isGaming = true;
 }
@@ -37,7 +40,8 @@ $(function(){
         if(timer >= updateTime) {
             if (isHit(minoX, minoY + 1, nowMino,nowRotate,field)){
                 MinoBakeField(minoX,minoY,nowMino,nowRotate,field);
-                ArratLineChack(field);
+                eraceLines += ArrayLineChack(field);
+                $("#notice").text(eraceLines.toString(10)+"Line");
                 reloadMino();
             }
             else {
@@ -119,7 +123,8 @@ document.addEventListener('keypress',
                 else
                 {
                     MinoBakeField(minoX,minoY,nowMino,nowRotate,field);
-                    ArratLineChack(field);
+                    eraceLines += ArrayLineChack(field);
+                    $("#notice").text(eraceLines.toString(10)+"Line");
                     reloadMino();
                     break;
                 }
@@ -170,8 +175,7 @@ function reloadMino()
     }
     //新たなミノを補充
     if(isHit(3,0,nextMinos[0],0,field)){
-        let notice =document.getElementById('notice'); 
-        notice.innerText = 'GameOver!';
+        $("#notice").text('GameOver!');
         Exit();
     }
     minoX = 3;

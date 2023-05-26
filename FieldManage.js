@@ -53,7 +53,7 @@ function displayTable (x,y, mino,rotate,array) {
     }
 }
 
-function ArratLineChack(array){
+function ArrayLineChack(array){
     var eraceLines = 0;
     //ライン消去
     for (let i = 0; i < array.length; i++)
