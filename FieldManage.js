@@ -69,7 +69,7 @@ function ArratLineChack(array){
 
         if (isLineFilled === true)
         {
-            $("#audio").get(0).play();
+            $("#audioBomb").get(0).play();
             for (let k = i; k > 0; k--)
             {
                 array[k] = [...array[k-1]];

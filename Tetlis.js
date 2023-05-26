@@ -69,6 +69,7 @@ document.addEventListener('keypress',
                 reloadMino();
                 minoViewTable("holdTBR",holdMino);
                 isHolded = true;
+                $("#audioReload").get(0).play();
             }
             if((holdMino != null)&& !isHit(minoX, minoY - 1, nowMino,nowRotate,field)&& !isHolded)
             {
@@ -81,6 +82,7 @@ document.addEventListener('keypress',
                 minoY = 0;
                 minoViewTable("holdTBR",holdMino);
                 isHolded = true;
+                $("#audioReload").get(0).play();
             }
     }
     if (e.key === 'a') {
