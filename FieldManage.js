@@ -4,7 +4,7 @@ function MinoBakeField(x,y,mino,rotate,array){
     {
         for (let j = 0; j < 4; j++)
         {
-            if((MinoShape(mino,rotate)[i][j] === 0)) 
+            if((mino.MinoRotateShape(rotate)[i][j] === 0)) 
             {
                 continue;
             }
@@ -17,7 +17,7 @@ function MinoBakeField(x,y,mino,rotate,array){
             {
                 continue;
             }
-            if((MinoShape(mino,rotate)[i][j]!=0)){
+            if((mino.MinoRotateShape(rotate)[i][j]!=0)){
                 array[y + i][x + j] = mino;
             }
         }
@@ -46,7 +46,7 @@ function displayTable (x,y, mino,rotate,array) {
                 $("#myTBR tr").eq(i).children("td").eq(j).css("background-color", "#000000");
             }
             else{
-                $("#myTBR tr").eq(i).children("td").eq(j).css("background-color", Color(bufferField[i][j]));
+                $("#myTBR tr").eq(i).children("td").eq(j).css("background-color", bufferField[i][j].Color);
             }
         }
 
@@ -54,7 +54,7 @@ function displayTable (x,y, mino,rotate,array) {
 }
 
 function ArratLineChack(array){
-    
+    var eraceLines = 0;
     //ライン消去
     for (let i = 0; i < array.length; i++)
     {
@@ -70,12 +70,14 @@ function ArratLineChack(array){
         if (isLineFilled === true)
         {
             $("#audioBomb").get(0).play();
+            eraceLines += 1;
             for (let k = i; k > 0; k--)
             {
                 array[k] = [...array[k-1]];
             }
         }
     }
+    return eraceLines;
 
 }
 
@@ -87,7 +89,7 @@ function isHit(x, y,mino,rotate,array)
     {
         for (let j = 0; j < 4; j++)
         {
-            if((MinoShape(mino,rotate)[i][j] === 0)) 
+            if((mino.MinoRotateShape(rotate)[i][j] === 0)) 
             {
                 continue;
             }
@@ -111,15 +113,15 @@ function isHit(x, y,mino,rotate,array)
 
 function minoViewTable(tableName,mino){
     //Tableに反映
-    for (let i = 0; i < MinoShape(mino,0).length; i++)
+    for (let i = 0; i < mino.MinoRotateShape(0).length; i++)
     {
-        for (let j = 0; j < MinoShape(mino,0)[0].length; j++)
+        for (let j = 0; j < mino.MinoRotateShape(0)[0].length; j++)
         {
-            if(MinoShape(mino,0)[i][j] === 0){
+            if(mino.MinoRotateShape(0)[i][j] === 0){
                 $("#" + tableName + " tr").eq(i).children("td").eq(j).css("background-color", "#000000");
             }
             else{
-                $("#" + tableName + " tr").eq(i).children("td").eq(j).css("background-color", Color(mino));
+                $("#" + tableName + " tr").eq(i).children("td").eq(j).css("background-color", mino.Color);
             }
         }
     }

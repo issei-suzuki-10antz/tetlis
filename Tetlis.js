@@ -9,7 +9,7 @@ const width = 10;
 
 //各種変数
 let nowRotate = 0;
-let nowMino = Mino.Z;
+let nowMino = MinoZ;
 let nextMinos =  null;
 let holdMino = null;
 
@@ -140,7 +140,7 @@ function Init() {
         }
     }
     //nextMino用意
-    nextMinos = [1,2,3,4,5,6,7]
+    nextMinos = [MinoI,MinoJ,MinoL,MinoO,MinoS,MinoT,MinoZ]
     for(i = 6; i > 0; i--)
     {
         var j = Math.floor(Math.random() * (i + 1));
@@ -151,14 +151,14 @@ function Init() {
     minoViewNextTable(nextMinos.slice(0,7));
 
     //最初のミノのみ代入
-    nowMino = Math.floor( Math.random() * 6 ) + 1;
+    nowMino = [MinoI,MinoJ,MinoL,MinoO,MinoS,MinoT,MinoZ][Math.floor( Math.random() * 6 ) + 1];
 }
 
 function reloadMino()
 {
     if(nextMinos.length < 8){
         let bufArray = [0];
-        bufArray = [1,2,3,4,5,6,7]
+        bufArray = [MinoI,MinoJ,MinoL,MinoO,MinoS,MinoT,MinoZ]
         for(i = 6; i > 0; i--)
         {
             var j = Math.floor(Math.random() * (i + 1));
