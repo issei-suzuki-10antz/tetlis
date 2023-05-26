@@ -43,7 +43,7 @@ function displayTable (x,y, mino,rotate,array) {
         for (let j = 0; j < array[0].length; j++)
         {
             if(bufferField[i][j] === 0){
-                $("#myTBR tr").eq(i).children("td").eq(j).css("background-color", "#FFFFFF");
+                $("#myTBR tr").eq(i).children("td").eq(j).css("background-color", "#000000");
             }
             else{
                 $("#myTBR tr").eq(i).children("td").eq(j).css("background-color", Color(bufferField[i][j]));
@@ -116,7 +116,7 @@ function minoViewTable(tableName,mino){
         for (let j = 0; j < MinoShape(mino,0)[0].length; j++)
         {
             if(MinoShape(mino,0)[i][j] === 0){
-                $("#" + tableName + " tr").eq(i).children("td").eq(j).css("background-color", "#FFFFFF");
+                $("#" + tableName + " tr").eq(i).children("td").eq(j).css("background-color", "#000000");
             }
             else{
                 $("#" + tableName + " tr").eq(i).children("td").eq(j).css("background-color", Color(mino));
